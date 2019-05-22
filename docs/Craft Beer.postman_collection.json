@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "31f75bc5-844d-4674-8d3b-98430278d5b5",
+		"name": "Craft Beer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create beer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"AAAA\", \"ingredients\": \"BBB, CCC\", \"alcoholContent\": \"DDDDD\", \"price\": 9.57, \"category\": \"EEEE\"}"
+				},
+				"url": {
+					"raw": "localhost:9000/beers/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						""
+					]
+				},
+				"description": "Create a beer"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all beers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/beers/",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						""
+					]
+				},
+				"description": "Get all beers"
+			},
+			"response": []
+		},
+		{
+			"name": "Get beer by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/beers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				},
+				"description": "Get a beer by id."
+			},
+			"response": []
+		},
+		{
+			"name": "Update beer",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": 97, \"name\": \"string\", \"ingredients\": \"string\", \"alcoholContent\": \"string\", \"category\": \"string\"}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				},
+				"description": "Update a beer"
+			},
+			"response": []
+		},
+		{
+			"name": "Patch a beer (partial update)",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"id\": 18, \"category\": \"CAT...\", \"price\": 8.76}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/beers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				},
+				"description": "Patch a beer(partial update with not all parameters)"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a beer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/beers/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"beers",
+						"1"
+					]
+				},
+				"description": "Delete a beer"
+			},
+			"response": []
+		}
+	]
+}
