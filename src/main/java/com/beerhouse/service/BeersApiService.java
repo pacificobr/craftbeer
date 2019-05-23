@@ -50,7 +50,11 @@ public class BeersApiService implements BeersApiDelegate {
 
     @Override
     public ResponseEntity<Void> beersIdDelete(String id) {
-        beerRepository.deleteById(getId(id));
+        Integer beerId = getId(id);
+        if (!beerRepository.existsById(beerId)) {
+            return getVoidResponse(HttpStatus.NOT_FOUND);
+        }
+        beerRepository.deleteById(beerId);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
@@ -65,38 +69,43 @@ public class BeersApiService implements BeersApiDelegate {
     public ResponseEntity<Void> beersIdPatch(String id, BeerDTO beer) {
         Integer beerId = getId(id);
         Optional<Beer> originalBeerOpt = beerRepository.findById(beerId);
-        if(originalBeerOpt.isPresent()){
-            //Avoid id manipulation
-            Beer beerEntity = beerMapper.toEntity(beer, beerId);
-            beerEntity = DataUtil.mergeObjects(beerEntity, originalBeerOpt.get());
-            beerRepository.save(beerEntity);
+        if (!originalBeerOpt.isPresent()) {
+            return getVoidResponse(HttpStatus.NOT_FOUND);
         }
-        return getNoContentResponse(HttpStatus.OK);
+        //Avoid id manipulation
+        Beer beerEntity = beerMapper.toEntity(beer, beerId);
+        beerEntity = DataUtil.mergeObjects(beerEntity, originalBeerOpt.get());
+        beerRepository.save(beerEntity);
+        return getVoidResponse(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Void> beersIdPut(String id, @Valid BeerDTO beer) {
-        Beer beerEntity = beerMapper.toEntity(beer, getId(id));
+        Integer beerId = getId(id);
+        if (!beerRepository.existsById(beerId)) {
+            return getVoidResponse(HttpStatus.NOT_FOUND);
+        }
+        Beer beerEntity = beerMapper.toEntity(beer, beerId);
         beerRepository.save(beerEntity);
-        return getNoContentResponse(HttpStatus.OK);
+        return getVoidResponse(HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Void> beersPost(@Valid BeerDTO beer) {
         Beer beerEntity = beerMapper.toEntity(beer);
         beerEntity = beerRepository.save(beerEntity);
-        ResponseEntity<Void> response = getNoContentResponse(beerEntity, HttpStatus.CREATED);
-//        ResponseEntity<Void> response = getNoContentResponse();
+        ResponseEntity<Void> response = getVoidResponse(beerEntity, HttpStatus.CREATED);
+//        ResponseEntity<Void> response = getVoidResponse();
         return response;
     }
 
-    private ResponseEntity<Void> getNoContentResponse(HttpStatus status){
-        return getNoContentResponse(null, status);
+    private ResponseEntity<Void> getVoidResponse(HttpStatus status) {
+        return getVoidResponse(null, status);
     }
 
-    private ResponseEntity<Void> getNoContentResponse(Beer beer, HttpStatus status){
+    private ResponseEntity<Void> getVoidResponse(Beer beer, HttpStatus status) {
         HttpHeaders headers = new HttpHeaders();
-        if(beer != null){
+        if (beer != null) {
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(beer.getId()).toUri();
             headers.setLocation(uri);
         }
@@ -104,8 +113,7 @@ public class BeersApiService implements BeersApiDelegate {
     }
 
 
-
-    private Integer getId(String id){
+    private Integer getId(String id) {
         return Integer.valueOf(id);
     }
 }

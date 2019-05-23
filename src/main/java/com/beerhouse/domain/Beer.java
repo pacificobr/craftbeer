@@ -114,7 +114,6 @@ public class Beer implements Serializable {
     public void setCategory(String category) {
         this.category = category;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
