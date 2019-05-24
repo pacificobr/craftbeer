@@ -81,3 +81,9 @@ Para implementar estas APIs você dever seguir a especificação do swagger que 
 
 ### [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/).
 ### [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/).
+
+## Informações adicionais:
+
+- A aplicação foi desenvolvida com a estratégia _API First_ baseada na documentação supra citada (docs/swagger-craftbeer). Para geração dos arquivos base a partir da documentação da API utilizar o comando `mvn generate-sources`.
+- Para executar utilizar o comando `mvn spring-boot:run` ou somente `mvn`
+- No ambiente local a aplicação estará disponível em http://localhost:9000/beerhouse/
