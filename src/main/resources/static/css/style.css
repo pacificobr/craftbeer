@@ -1,0 +1,27 @@
+body{
+    /*background-color: lightgoldenrodyellow;*/
+    background-color: #FFF;
+    /*Center Content*/
+    display: grid;
+    height: 100vh;
+    margin: 0;
+    place-items: center center;
+}
+
+ul{
+    list-style: none;
+}
+
+ul li {
+    margin: 10px;
+}
+
+a:link, a:visited {
+    background-color: #FF0000;
+    color: white;
+    padding: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 2em;
+}
